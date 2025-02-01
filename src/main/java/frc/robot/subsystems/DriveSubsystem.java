@@ -6,8 +6,12 @@ package frc.robot.subsystems;
 
 import java.util.function.DoubleSupplier;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -16,24 +20,19 @@ import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
   
-  public final CANSparkMax leftFrontMotor = new CANSparkMax(Constants.OperatorConstants.LEFT_FRONT_MOTOR_ID,MotorType.kBrushed);
-  public final CANSparkMax rightFrontMotor = new CANSparkMax(Constants.OperatorConstants.RIGHT_FRONT_MOTOR_ID,MotorType.kBrushed);
-  public final CANSparkMax leftBackMotor = new CANSparkMax(Constants.OperatorConstants.LEFT_BACK_MOTOR_ID,MotorType.kBrushed);
-  public final CANSparkMax rightBackMotor = new CANSparkMax(Constants.OperatorConstants.RIGHT_BACK_MOTOR_ID,MotorType.kBrushed);
+  private final SparkMax leftFrontMotor = new SparkMax(Constants.OperatorConstants.LEFT_FRONT_MOTOR_ID,MotorType.kBrushed);
+  private final SparkMax rightFrontMotor = new SparkMax(Constants.OperatorConstants.RIGHT_FRONT_MOTOR_ID,MotorType.kBrushed);
+  private final SparkMax leftBackMotor = new SparkMax(Constants.OperatorConstants.LEFT_BACK_MOTOR_ID,MotorType.kBrushed);
+  private final SparkMax rightBackMotor = new SparkMax(Constants.OperatorConstants.RIGHT_BACK_MOTOR_ID,MotorType.kBrushed);
   private final DifferentialDrive differentialDrive;
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-    leftFrontMotor.restoreFactoryDefaults();
-    rightFrontMotor.restoreFactoryDefaults();
-    leftBackMotor.restoreFactoryDefaults();
-    rightBackMotor.restoreFactoryDefaults();
+    SparkBaseConfig config = new SparkMaxConfig();
+        leftBackMotor.configure(config.follow(leftFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        rightBackMotor.configure(config.follow(rightFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+       
 
-    leftBackMotor.follow(leftFrontMotor);
-    rightBackMotor.follow(rightFrontMotor);
-
-    rightFrontMotor.setInverted(true);
     differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
-
   }
 
   
@@ -43,7 +42,7 @@ public class DriveSubsystem extends SubsystemBase {
     },() -> {
       differentialDrive.stopMotor();
     });
-  }
+  } 
 
   @Override
   public void periodic() {
@@ -55,9 +54,8 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-
-public Command exampleMethodCommand() {
-    // TODO Auto-generated method stub
+ public Command exampleMethodCommand() {
+//    // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'exampleMethodCommand'");
-}
+ }
 }

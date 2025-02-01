@@ -47,6 +47,7 @@ public class RobotContainer {
     m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY,m_driverController::getLeftX));
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
+    m_driverController.a().whileTrue(m_DriveSubsystem.coralForwardCommand());
   }
 
   /**

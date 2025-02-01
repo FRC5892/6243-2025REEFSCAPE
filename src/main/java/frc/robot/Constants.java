@@ -19,5 +19,8 @@ public final class Constants {
     public static final int RIGHT_FRONT_MOTOR_ID = 3;
     public static final int LEFT_BACK_MOTOR_ID = 2;
     public static final int RIGHT_BACK_MOTOR_ID = 4;
+    public static final int CORAL_MOTOR_ID = 27000;
+
+    public static final double CORAL_MOTOR_SPEED = 1;
   }
 }

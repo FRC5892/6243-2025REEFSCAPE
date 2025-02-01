@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -20,6 +21,7 @@ public class DriveSubsystem extends SubsystemBase {
   public final CANSparkMax rightFrontMotor = new CANSparkMax(Constants.OperatorConstants.RIGHT_FRONT_MOTOR_ID,MotorType.kBrushed);
   public final CANSparkMax leftBackMotor = new CANSparkMax(Constants.OperatorConstants.LEFT_BACK_MOTOR_ID,MotorType.kBrushed);
   public final CANSparkMax rightBackMotor = new CANSparkMax(Constants.OperatorConstants.RIGHT_BACK_MOTOR_ID,MotorType.kBrushed);
+  public final CANSparkMax coralMotor = new CANSparkMax(Constants.OperatorConstants.CORAL_MOTOR_ID,MotorType.kBrushed);
   private final DifferentialDrive differentialDrive;
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -45,10 +47,17 @@ public class DriveSubsystem extends SubsystemBase {
     });
   }
 
+  public Command coralForwardCommand(){
+    return new RunCommand (()->{
+       coralMotor.set(Constants.OperatorConstants.CORAL_MOTOR_SPEED);
+    }, this);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
 
   @Override
   public void simulationPeriodic() {

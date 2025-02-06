@@ -33,12 +33,12 @@ public class DriveSubsystem extends SubsystemBase {
     SparkBaseConfig config5 = new SparkMaxConfig();
         leftBackMotor.configure(config.follow(leftFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         rightBackMotor.configure(config2.follow(rightFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        leftFrontMotor.configure(config4.inverted(true), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        rightFrontMotor.configure(config5.inverted(false), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        leftFrontMotor.configure(config4.inverted(false), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        rightFrontMotor.configure(config5.inverted(true), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
   }
   
-  public Command driveCommand (DoubleSupplier speed, DoubleSupplier rotation){
+  public Command driveCommand(DoubleSupplier speed, DoubleSupplier rotation){
     return runEnd(()->{
       differentialDrive.arcadeDrive(speed.getAsDouble(), rotation.getAsDouble());
     },() -> {

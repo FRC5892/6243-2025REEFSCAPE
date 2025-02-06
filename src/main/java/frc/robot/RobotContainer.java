@@ -47,6 +47,7 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
   
     m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY,m_driverController::getLeftX));
+
     m_driverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
     m_driverController.b().whileTrue(m_CoralSubsystem.coralStopCommand());
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,

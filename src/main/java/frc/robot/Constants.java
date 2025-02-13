@@ -26,7 +26,7 @@ public final class Constants {
   }
 
   public static class SpeedConstants{
-    public static final double CORAL_FORWARD_SPEED = 0.5;
+    public static final double CORAL_FORWARD_SPEED = 0.3;
   }
   
 }

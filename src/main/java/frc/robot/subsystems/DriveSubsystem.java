@@ -36,12 +36,9 @@ public class DriveSubsystem extends SubsystemBase {
   private final SparkMax leftBackMotor = new SparkMax(Constants.IdConstants.LEFT_BACK_MOTOR_ID,MotorType.kBrushed);
   private final SparkMax rightBackMotor = new SparkMax(Constants.IdConstants.RIGHT_BACK_MOTOR_ID,MotorType.kBrushed);
   private final DifferentialDrive differentialDrive;
-  Encoder leftEncoder = new Encoder(0,1);
-  Encoder rightEncoder = new Encoder(0,2);
-
-  private final DriveSubsystem m_leftEncoder = new DriveSubsystem();
-  private final DriveSubsystem m_rightEncoder = new DriveSubsystem();
-
+  
+  Encoder m_leftEncoder = new Encoder(0,1);
+  Encoder m_rightEncoder = new Encoder(0,2);
   DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(
     m_gyro.getRotation2d(),
     m_leftEncoder.getDistance(), m_rightEncoder.getDistance(),
@@ -57,11 +54,12 @@ public class DriveSubsystem extends SubsystemBase {
         leftFrontMotor.configure(config4.inverted(false), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         rightFrontMotor.configure(config5.inverted(true), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+        
         RobotConfig config;
         try{
           config = RobotConfig.fromGUISettings();
         } catch (Exception e) {
-          e.setStackTrace(null);
+          e.printStackTrace(null);
         }
         
         AutoBuilder.configure(
@@ -69,7 +67,8 @@ public class DriveSubsystem extends SubsystemBase {
           this::resetPose,
           this::RobotRelativeSpeeds,
           (speeds, feedforwards)->driveRobotRelative(speeds),
-          new PPLTVController(0.02), config, () -> {
+          new PPLTVController(0.02),
+          config, () -> {
             var alliance = DriverStation.getAlliance();
             if(alliance.isPresent()) {
               return alliance.get() == DriverStation.Alliance.Red;

@@ -10,7 +10,6 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -21,8 +20,8 @@ public class CoralSubsystem extends SubsystemBase {
   /** Creates a new CoralSubsystem. */
   public CoralSubsystem() {
 
-     SparkBaseConfig config3 = new SparkMaxConfig();
-        coralMotor.configure(config3.inverted(true), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+     SparkBaseConfig config = new SparkMaxConfig();
+        coralMotor.configure(config.inverted(true), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
   
   public Command coralForwardCommand (){

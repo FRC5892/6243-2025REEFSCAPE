@@ -7,25 +7,31 @@ package frc.robot.subsystems;
 import static edu.wpi.first.units.Units.Rotation;
 
 import java.util.function.DoubleSupplier;
-
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.config.PIDConstants;
-import com.pathplanner.lib.config.RobotConfig;
-import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.revrobotics.spark.SparkMax;
-
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPLTVController;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.estimator.PoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import org.littletonrobotics.junction.AutoLogOutput;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.Odometry;
+import com.pathplanner.lib.config.RobotConfig;
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
+import edu.wpi.first.math.kinematics.DifferentialDriveModulePosition;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -39,10 +45,25 @@ public class DriveSubsystem extends SubsystemBase {
   
   Encoder m_leftEncoder = new Encoder(0,1);
   Encoder m_rightEncoder = new Encoder(0,2);
+  
   DifferentialDriveOdometry m_odometry = new DifferentialDriveOdometry(
     m_gyro.getRotation2d(),
     m_leftEncoder.getDistance(), m_rightEncoder.getDistance(),
     new Pose2d(5.0, 13.5, new Rotation2d())); 
+    
+    private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(getModuleTranslations());
+    private Rotation2d rawGyroRotation = new Rotation2d();
+    private DifferentialDriveModulePosition[] lastModulePositions =
+    new DifferentialDriveModulePosition[] {
+      new DifferentialDriveModulePosition(),
+      new DifferentialDriveModulePosition(),
+      new DifferentialDriveModulePosition(),
+      new DifferentialDriveModulePosition()
+    };
+
+    private DifferentialDrivePoseEstimator poseEstimator =
+    new DiffentialDriveEstimator(kinematics, rawGyroRotation, lastModulePositions, new Pose2d());
+
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
     SparkBaseConfig configer = new SparkMaxConfig();
@@ -87,6 +108,14 @@ public class DriveSubsystem extends SubsystemBase {
       differentialDrive.stopMotor();
     });
   } 
+  private final double getHeading(){
+    
+  }
+
+  @AutoLogOutput(key = "Odometry/Robot")
+    public Pose2d getPose(){
+      return poseEstimator.getEstimatedPosition();
+    }
 
   @Override
   public void periodic() {

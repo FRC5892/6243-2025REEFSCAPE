@@ -20,13 +20,14 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.PoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import org.littletonrobotics.junction.AutoLogOutput;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.Odometry;
 import com.pathplanner.lib.config.RobotConfig;
+
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.estimator.DifferentialDrivePoseEstimator;
-import edu.wpi.first.math.kinematics.DifferentialDriveModulePosition;
+import edu.wpi.first.math.kinematics.DifferentialDriveModulePositions;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -34,6 +35,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Constants.OdometryConstants;
 
 public class DriveSubsystem extends SubsystemBase {
   
@@ -51,18 +53,10 @@ public class DriveSubsystem extends SubsystemBase {
     m_leftEncoder.getDistance(), m_rightEncoder.getDistance(),
     new Pose2d(5.0, 13.5, new Rotation2d())); 
     
-    private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(getModuleTranslations());
-    private Rotation2d rawGyroRotation = new Rotation2d();
-    private DifferentialDriveModulePosition[] lastModulePositions =
-    new DifferentialDriveModulePosition[] {
-      new DifferentialDriveModulePosition(),
-      new DifferentialDriveModulePosition(),
-      new DifferentialDriveModulePosition(),
-      new DifferentialDriveModulePosition()
-    };
+    private DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(OdometryConstants.TRACK_WIDTH);
 
-    private DifferentialDrivePoseEstimator poseEstimator =
-    new DiffentialDriveEstimator(kinematics, rawGyroRotation, lastModulePositions, new Pose2d());
+    private DifferentialDriveOdometry poseEstimator =
+    new DifferentialDriveOdometry(kinematics);
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
@@ -85,7 +79,7 @@ public class DriveSubsystem extends SubsystemBase {
         
         AutoBuilder.configure(
           this::getPose,
-          this::resetPose,
+          this::setPose,
           this::RobotRelativeSpeeds,
           (speeds, feedforwards)->driveRobotRelative(speeds),
           new PPLTVController(0.02),
@@ -112,10 +106,16 @@ public class DriveSubsystem extends SubsystemBase {
     
   }
 
-  @AutoLogOutput(key = "Odometry/Robot")
-    public Pose2d getPose(){
-      return poseEstimator.getEstimatedPosition();
-    }
+  public Pose2d getPose(){
+    return poseEstimator.getEstimatedPosition();
+  }
+
+  public void setPose(Pose2d pose){
+    poseEstimator.resetPose(pose);
+  }
+  public ChassisSpeeds getChassisSpeeds() {
+    return ChassisSpeeds.
+  }
 
   @Override
   public void periodic() {

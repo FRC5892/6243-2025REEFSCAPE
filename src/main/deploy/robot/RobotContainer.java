@@ -5,11 +5,16 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.Commands.Autos;
+import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.AlgaeSubsystem;
-import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -29,13 +34,11 @@ public class RobotContainer {
   private final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
   private final CoralSubsystem m_CoralSubsystem = new CoralSubsystem();
   private final AlgaeSubsystem m_AlgaeSubsystem = new AlgaeSubsystem();
-  private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-      private final CommandXboxController m_codriverController =
-      new CommandXboxController(OperatorConstants.kCoDriverControllerPort);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -55,17 +58,16 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
   
     m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY,m_driverController::getLeftX));
-    m_ClimbSubsystem.setDefaultCommand(m_ClimbSubsystem.climbCommand(m_codriverController::getLeftY,m_codriverController::getLeftX));
 
-    //Coral Buttons
-    m_codriverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
-
-    // Algae Arm and Shooter Buttons
-    m_codriverController.x().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
-    m_codriverController.b().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
-    m_codriverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
-    m_codriverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeOuttakeCommand());
+    m_driverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
+    m_driverController.b().whileTrue(m_CoralSubsystem.coralStopCommand());
     
+    m_driverController.x().whileTrue(m_AlgaeSubsystem.algaeForwardCommand());
+    m_driverController.y().whileTrue(m_AlgaeSubsystem.algaeBackCommand());
+    m_driverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeStopCommand());
+    m_driverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
+    m_driverController.rightTrigger().whileTrue(m_AlgaeSubsystem.algaeOutakeCommand());
+    m_driverController.leftTrigger().whileTrue(m_AlgaeSubsystem.algaeStopShootingCommand());
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   }
@@ -77,6 +79,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_DriveSubsystem);
+    return Autos.exampleAuto(m_exampleSubsystem);
   }
 }

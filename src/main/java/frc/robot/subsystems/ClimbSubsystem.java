@@ -3,6 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+
+import java.util.function.DoubleSupplier;
+
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -13,24 +16,25 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class CoralSubsystem extends SubsystemBase {
-   private final SparkMax coralMotor = new SparkMax(Constants.IdConstants.CORAL_MOTOR_ID,MotorType.kBrushed);
-  /** Creates a new CoralSubsystem. */
-  public CoralSubsystem() {
+public class ClimbSubsystem extends SubsystemBase {
+   private final SparkMax climbArmMotor = new SparkMax(Constants.IdConstants.ALGAE_MOTOR_MOVE_ID,MotorType.kBrushed);
+  /** Creates a new ClimbSubsystem. */
+  public ClimbSubsystem() {
+    SparkBaseConfig config = new SparkMaxConfig();
+     climbArmMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+  }
 
-     SparkBaseConfig config = new SparkMaxConfig();
-        coralMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-  }
-       public Command coralForwardCommand(){
+  public Command climbCommand(DoubleSupplier speed, DoubleSupplier rotation){
     return runEnd(()->{
-      coralMotor.set(Constants.SpeedConstants.CORAL_FORWARD_SPEED);
+      climbArmMotor.set(Constants.SpeedConstants.CLIMB_ARM_MOTOR_SPEED);
     },() -> {
-      coralMotor.stopMotor();
+      climbArmMotor.stopMotor();
     });
-  }
+  } 
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
+
 }

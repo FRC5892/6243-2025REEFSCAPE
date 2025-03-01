@@ -7,7 +7,15 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.AlgaeSubsystem;
+import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -19,8 +27,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+
+//AUTONOMUS Im not sure if it should be here.
+private final SendableChooser<Command> autChooser;
+  
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
+  private final CoralSubsystem m_CoralSubsystem = new CoralSubsystem();
+  private final AlgaeSubsystem m_AlgaeSubsystem = new AlgaeSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -29,6 +43,9 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
+    public AutoBuilder autoChooser = AutoBuilder.buildAutoChooser();
+
+    SmartDashboard.putData("Auto Chooser",autoChooser);
     configureBindings();
   }
 
@@ -45,6 +62,16 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
   
     m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY,m_driverController::getLeftX));
+
+    m_driverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
+    m_driverController.b().whileTrue(m_CoralSubsystem.coralStopCommand());
+    
+    m_driverController.x().whileTrue(m_AlgaeSubsystem.algaeForwardCommand());
+    m_driverController.y().whileTrue(m_AlgaeSubsystem.algaeBackCommand());
+    m_driverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeStopCommand());
+    m_driverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
+    m_driverController.rightTrigger().whileTrue(m_AlgaeSubsystem.algaeOutakeCommand());
+    m_driverController.leftTrigger().whileTrue(m_AlgaeSubsystem.algaeStopShootingCommand());
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   }
@@ -55,7 +82,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    return autoChooser.getSelected();
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_DriveSubsystem);
+    return new PathPlannerAuto();
   }
 }

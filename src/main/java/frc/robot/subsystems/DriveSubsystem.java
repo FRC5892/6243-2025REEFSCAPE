@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+
 import java.util.function.DoubleSupplier;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -29,12 +30,13 @@ public class DriveSubsystem extends SubsystemBase {
     SparkBaseConfig config2 = new SparkMaxConfig(); 
     SparkBaseConfig config4 = new SparkMaxConfig();
     SparkBaseConfig config5 = new SparkMaxConfig();
-        leftBackMotor.configure(configer.follow(leftFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        rightBackMotor.configure(config2.follow(rightFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        leftFrontMotor.configure(config4.inverted(false), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        rightFrontMotor.configure(config5.inverted(true), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
-      }
+
+    leftBackMotor.configure(configer.follow(leftFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    rightBackMotor.configure(config2.follow(rightFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    leftFrontMotor.configure(config4.inverted(false), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    rightFrontMotor.configure(config5.inverted(true), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+  }
   
   public Command driveCommand(DoubleSupplier speed, DoubleSupplier rotation){
     return runEnd(()->{
@@ -55,7 +57,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
  public Command exampleMethodCommand() {
-//    // TODO Auto-generated method stub
+//
     throw new UnsupportedOperationException("Unimplemented method 'exampleMethodCommand'");
  }
 }

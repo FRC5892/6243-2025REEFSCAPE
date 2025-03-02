@@ -6,7 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Commands.Autos;
-import frc.robot.subsystems.AlgaeSubsystem;
+//import frc.robot.subsystems.AlgaeSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -28,7 +28,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
   private final CoralSubsystem m_CoralSubsystem = new CoralSubsystem();
-  private final AlgaeSubsystem m_AlgaeSubsystem = new AlgaeSubsystem();
+  //private final AlgaeSubsystem m_AlgaeSubsystem = new AlgaeSubsystem();
   private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -54,17 +54,18 @@ public class RobotContainer {
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
   
-    m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY,m_driverController::getLeftX));
-    m_ClimbSubsystem.setDefaultCommand(m_ClimbSubsystem.climbCommand(m_codriverController::getLeftY,m_codriverController::getLeftX));
+    m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY, m_driverController::getLeftX));
+
 
     //Coral Buttons
     m_codriverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
 
-    // Algae Arm and Shooter Buttons
-    m_codriverController.x().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
-    m_codriverController.b().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
-    m_codriverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
-    m_codriverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeOuttakeCommand());
+    m_codriverController.y().whileTrue(m_ClimbSubsystem.climbCommand());
+    m_codriverController.rightBumper().whileTrue(m_ClimbSubsystem.climbBackCommand());
+   // m_codriverController.x().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
+    //m_codriverController.b().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
+   // m_codriverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
+    //m_codriverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeOuttakeCommand());
     
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
@@ -75,7 +76,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return Autos.exampleAuto(m_DriveSubsystem);
   }

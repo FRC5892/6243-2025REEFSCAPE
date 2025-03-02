@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+
 import java.util.function.DoubleSupplier;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -55,7 +56,7 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
  public Command exampleMethodCommand() {
-//    // TODO Auto-generated method stub
+//
     throw new UnsupportedOperationException("Unimplemented method 'exampleMethodCommand'");
  }
 }

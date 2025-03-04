@@ -4,13 +4,9 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
+
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.SparkBaseConfig;
-import com.revrobotics.spark.config.SparkMaxConfig;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,12 +15,7 @@ public class AlgaeSubsystem extends SubsystemBase {
    private final SparkMax algaeMotorMove = new SparkMax(Constants.IdConstants.ALGAE_MOTOR_MOVE_ID,MotorType.kBrushless);
    private final SparkMax algaeMotorShoot = new SparkMax(Constants.IdConstants.ALGAE_MOTOR_SHOOT_ID,MotorType.kBrushless);
   /** Creates a new AlgaeSubsystem. */
-  public AlgaeSubsystem() {
-     SparkBaseConfig config = new SparkMaxConfig();
-     SparkBaseConfig config1 = new SparkMaxConfig();
-     algaeMotorShoot.configure(config1, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-     algaeMotorMove.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-  }
+  public AlgaeSubsystem() {}
 
   public Command algaeArmForwardCommand(){
     return runEnd(()->{

@@ -25,17 +25,17 @@ public final class Constants {
     public static final int LEFT_BACK_MOTOR_ID = 16;
     public static final int RIGHT_BACK_MOTOR_ID = 15;
     public static final int CORAL_MOTOR_ID = 17;
-    //public static final int ALGAE_MOTOR_MOVE_ID = 14;
-    //public static final int ALGAE_MOTOR_SHOOT_ID = 13;
+    public static final int ALGAE_MOTOR_MOVE_ID = 14;
+    public static final int ALGAE_MOTOR_SHOOT_ID = 13;
     public static final int CLIMB_ARM_MOTOR_ID = 12;
     }
 
   public static class SpeedConstants{
-    public static final double CORAL_FORWARD_SPEED = 0.3;
+    public static final double CORAL_FORWARD_SPEED = -0.3;
     public static final double ALGAE_MOTOR_MOVE_SPEED = 0.3;
     public static final double ALGAE_MOTOR_MOVE_BACK_SPEED = -0.3;
-    public static final double ALGAE_MOTOR_OUTTAKE_SPEED = 0.3;
-    public static final double ALGAE_MOTOR_INTAKE_SPEED = -0.3;
+    public static final double ALGAE_MOTOR_OUTTAKE_SPEED = 1.3;
+    public static final double ALGAE_MOTOR_INTAKE_SPEED = -1.3;
     public static final double CLIMB_ARM_MOTOR_SPEED = 0.3;
     public static final double CLIMB_BACK_MOTOR_SPEED = -0.3;
   }

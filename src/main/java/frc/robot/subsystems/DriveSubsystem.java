@@ -24,7 +24,6 @@ public class DriveSubsystem extends SubsystemBase {
   private final SparkMax leftBackMotor = new SparkMax(Constants.IdConstants.LEFT_BACK_MOTOR_ID,MotorType.kBrushed);
   private final SparkMax rightBackMotor = new SparkMax(Constants.IdConstants.RIGHT_BACK_MOTOR_ID,MotorType.kBrushed);
   private final DifferentialDrive differentialDrive;
-
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
     SparkBaseConfig configer = new SparkMaxConfig();
@@ -32,10 +31,10 @@ public class DriveSubsystem extends SubsystemBase {
     SparkBaseConfig config4 = new SparkMaxConfig();
     SparkBaseConfig config5 = new SparkMaxConfig();
 
-    leftBackMotor.configure(configer.follow(leftFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    rightBackMotor.configure(config2.follow(rightFrontMotor), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    leftFrontMotor.configure(config4.inverted(false), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    rightFrontMotor.configure(config5.inverted(true), ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    leftBackMotor.configure(configer.follow(leftFrontMotor), ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+    rightBackMotor.configure(config2.follow(rightFrontMotor), ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+    leftFrontMotor.configure(config4.inverted(false), ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+    rightFrontMotor.configure(config5.inverted(true), ResetMode.kNoResetSafeParameters,PersistMode.kNoPersistParameters);
     differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
   }
   

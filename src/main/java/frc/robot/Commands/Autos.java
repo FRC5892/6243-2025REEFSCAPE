@@ -21,6 +21,23 @@ public final class Autos {
     ); 
   }
 
+  public static Command simpleCenterL1AutoPart2(DriveSubsystem driveSubsystem,CoralSubsystem coral) {
+    // this is like a joystick. But, the speed is always 1 (100% forward
+    // and the rotation is always 0 (forward)
+    return driveSubsystem.driveCommand(()->1, ()->0)
+    // stop after 7 seconds, should be at the station by then
+    .withTimeout(7)
+    .andThen(
+      // outtake for 5 seconds 
+      coral.coralForwardCommand().withTimeout(5)
+    ) .withTimeout(7)
+    .andThen(
+      driveSubsystem.driveCommand(()->-1, ()->0)
+      .withTimeout(7)
+      .andThen(driveSubsystem.driveCommand(()->0, ()->90))
+    ); 
+  }
+
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }

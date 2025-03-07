@@ -19,7 +19,7 @@ public final class Autos {
       // outtake for 5 seconds 
       coral.coralForwardCommand().withTimeout(5)
     ); 
-  }
+  } 
 
   private Autos() {
     throw new UnsupportedOperationException("This is a utility class!");

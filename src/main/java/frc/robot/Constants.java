@@ -16,7 +16,7 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
-    public static final int kCoDriverControllerPort = 2;
+    public static final int kCoDriverControllerPort = 1;
   }
 
   public static class IdConstants{
@@ -31,7 +31,9 @@ public final class Constants {
     }
 
   public static class SpeedConstants{
-    public static final double CORAL_FORWARD_SPEED = -0.3;
+    public static final double LEFT_FRONT_MOTOR_SPEED = 0.3;
+    public static final double RIGHT_FRONT_MOTOR_SPEED = 0.3;
+    public static final double CORAL_FORWARD_SPEED = -0.5;
     public static final double ALGAE_MOTOR_MOVE_SPEED = 0.3;
     public static final double ALGAE_MOTOR_MOVE_BACK_SPEED = -0.3;
     public static final double ALGAE_MOTOR_OUTTAKE_SPEED = 1.3;

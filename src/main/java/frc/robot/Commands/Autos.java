@@ -12,9 +12,9 @@ public final class Autos {
   public static Command simpleCenterL1Auto(DriveSubsystem driveSubsystem,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return driveSubsystem.driveCommand(()->1, ()->0)
+    return driveSubsystem.driveCommand(()->-0.6, ()->-0)
     // stop after 7 seconds, should be at the station by then
-    .withTimeout(7)
+    .withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
       coral.coralForwardCommand().withTimeout(5)

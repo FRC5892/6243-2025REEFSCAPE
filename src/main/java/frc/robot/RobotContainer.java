@@ -86,7 +86,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-   public Command getAutonomousCommand2() {
+   public Command getAutonomousCommand() {
     return Autos.simpleCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem);
   }
 }

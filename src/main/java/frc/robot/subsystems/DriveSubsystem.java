@@ -26,15 +26,6 @@ public class DriveSubsystem extends SubsystemBase {
   private final DifferentialDrive differentialDrive;
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-    SparkBaseConfig configer = new SparkMaxConfig();
-    SparkBaseConfig config2 = new SparkMaxConfig(); 
-    SparkBaseConfig config4 = new SparkMaxConfig();
-    SparkBaseConfig config5 = new SparkMaxConfig();
-
-    leftBackMotor.configure(configer.follow(leftFrontMotor), ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
-    rightBackMotor.configure(config2.follow(rightFrontMotor), ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
-    leftFrontMotor.configure(config4.inverted(false), ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
-    rightFrontMotor.configure(config5.inverted(true), ResetMode.kNoResetSafeParameters,PersistMode.kNoPersistParameters);
     differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
   }
   

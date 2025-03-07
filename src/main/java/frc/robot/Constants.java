@@ -38,7 +38,7 @@ public final class Constants {
     public static final double ALGAE_MOTOR_MOVE_BACK_SPEED = -0.3;
     public static final double ALGAE_MOTOR_OUTTAKE_SPEED = 1.3;
     public static final double ALGAE_MOTOR_INTAKE_SPEED = -1.3;
-    public static final double CLIMB_ARM_MOTOR_SPEED = 0.3;
-    public static final double CLIMB_BACK_MOTOR_SPEED = -0.3;
+    public static final double CLIMB_ARM_MOTOR_SPEED = 0.5;
+    public static final double CLIMB_BACK_MOTOR_SPEED = -0.5;
   }
 }

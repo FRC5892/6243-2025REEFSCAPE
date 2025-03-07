@@ -11,7 +11,10 @@ import frc.robot.subsystems.AlgaeSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -49,6 +52,10 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Configure the trigger bindings
+    SendableChooser<Command> autoChooser = new SendableChooser<>();
+    autoChooser.addOption("None", Commands.none());
+    autoChooser.addOption("Center Simple L1", Autos.simpleCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem));
+    SmartDashboard.putData("Auto Chooser",autoChooser);
     configureBindings();
   }
 
@@ -80,7 +87,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
    public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return Autos.exampleAuto(m_DriveSubsystem);
+    return Autos.simpleCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem);
   }
 }

@@ -14,7 +14,7 @@ public final class Autos {
     // and the rotation is always 0 (forward)
     return driveSubsystem.driveCommand(()->-0.6, ()->0)
     // stop after 7 seconds, should be at the station by then
-    .withTimeout(5)
+    .withTimeout(3)
     .andThen(
       // outtake for 5 seconds 
       coral.coralForwardCommand().withTimeout(5)
@@ -30,6 +30,25 @@ public final class Autos {
     .andThen(
       // outtake for 5 seconds 
       drive.driveCommand(()->0,()->25)
+    )
+    .andThen(
+      drive.driveCommand(()->-0.6, ()->0)
+      .withTimeout(2)
+    )
+    .andThen(
+      coral.coralForwardCommand().withTimeout(5)
+    ); 
+  } 
+
+  public static Command simpleRightL1Auto(DriveSubsystem drive,CoralSubsystem coral) {
+    // this is like a joystick. But, the speed is always 1 (100% forward
+    // and the rotation is always 0 (forward)
+    return drive.driveCommand(()->-0.6, ()->0)
+    // stop after 7 seconds, should be at the station by then
+    .withTimeout(5)
+    .andThen(
+      // outtake for 5 seconds 
+      drive.driveCommand(()->0,()->-25)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0)

@@ -12,10 +12,19 @@ import frc.robot.Constants;
 public class CoralSubsystem extends SubsystemBase {
    private final SparkMax coralMotor = new SparkMax(Constants.IdConstants.CORAL_MOTOR_ID,MotorType.kBrushed);
   /** Creates a new CoralSubsystem. */
-  public CoralSubsystem() {}
-  public Command coralForwardCommand(){
+  public CoralSubsystem() {
+  }
+       public Command coralForwardCommand(){
     return runEnd(()->{
       coralMotor.set(Constants.SpeedConstants.CORAL_FORWARD_SPEED);
+    },() -> {
+      coralMotor.stopMotor();
+    });
+  }
+
+  public Command coralBackwardCommand(){
+    return runEnd(()->{
+      coralMotor.set(Constants.SpeedConstants.CORAL_BACKWARD_SPEED);
     },() -> {
       coralMotor.stopMotor();
     });

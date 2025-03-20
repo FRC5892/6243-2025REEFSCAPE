@@ -67,6 +67,7 @@ public class RobotContainer {
 
     //Coral Controls
     m_codriverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
+    m_codriverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
     //Climb Controls
     m_codriverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbCommand());
     m_codriverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbBackCommand());

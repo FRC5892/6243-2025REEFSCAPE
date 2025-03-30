@@ -53,7 +53,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     SendableChooser<Command> autoChooser = new SendableChooser<>();
     autoChooser.addOption("None", Commands.none());
-    autoChooser.addOption("Center Simple L1", Autos.simpleCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem));
+    autoChooser.addOption("Center One L1", Autos.OneCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem));
     SmartDashboard.putData("Auto Chooser",autoChooser);
     configureBindings();
   }
@@ -66,19 +66,16 @@ public class RobotContainer {
 
 
     //Coral Controls
-    m_codriverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
-    m_codriverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
+    m_driverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
+    m_driverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
     //Climb Controls
-    m_codriverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbCommand());
-    m_codriverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbBackCommand());
+    m_driverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbCommand());
+    m_driverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbBackCommand());
     //Algae Controls
-    m_codriverController.b().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
-    m_codriverController.y().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
-    m_codriverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
-    m_codriverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeOuttakeCommand());
-    
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
+    m_driverController.b().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
+    m_driverController.y().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
+    m_driverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
+    m_driverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeOuttakeCommand());
   }
 
   /**
@@ -87,6 +84,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
    public Command getAutonomousCommand() {
-    return Autos.simpleCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem);
+    return Autos.OneCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem);
   }
 }

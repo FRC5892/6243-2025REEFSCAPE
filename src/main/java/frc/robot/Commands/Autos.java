@@ -12,21 +12,21 @@ public final class Autos {
   public static Command OneCenterL1Auto(DriveSubsystem driveSubsystem,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return driveSubsystem.driveCommand(()->-0.6, ()->0)
-    // stop after 7 seconds, should be at the station by then
-    .withTimeout(3)
+    return driveSubsystem.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
-      coral.coralForwardCommand().withTimeout(5)
-    ); 
+      coral.coralForwardCommand().withTimeout(3));
+      // .andThen(
+      //   driveSubsystem.driveCommand(()->0.6, ()->0).withTimeout(2))
+      //   .andThen(
+      //     driveSubsystem.driveCommand(()->2, ()->1).withTimeout(2)
+      //   ); 
   }   
 
   public static Command OneLeftL1Auto(DriveSubsystem drive,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return drive.driveCommand(()->-0.6, ()->0)
-    // stop after 7 seconds, should be at the station by then
-    .withTimeout(5)
+    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
       drive.driveCommand(()->0,()->30)
@@ -36,15 +36,13 @@ public final class Autos {
     )
     .andThen(
       coral.coralForwardCommand().withTimeout(5)
-    ); 
+    ) ; 
   } 
 
   public static Command OneRightL1Auto(DriveSubsystem drive,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return drive.driveCommand(()->-0.6, ()->0)
-    // stop after 7 seconds, should be at the station by then
-    .withTimeout(5)
+    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
       drive.driveCommand(()->0,()->-30)
@@ -60,12 +58,10 @@ public final class Autos {
   public static Command LeftOneHalfAuto(DriveSubsystem drive,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return drive.driveCommand(()->-0.6, ()->0)
-    // stop after 7 seconds, should be at the station by then
-    .withTimeout(5)
+    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
-      drive.driveCommand(()->0,()->30)
+      drive.driveCommand(()->0,()->0.30)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0).withTimeout(2)
@@ -77,13 +73,13 @@ public final class Autos {
       drive.driveCommand(()->0.6,()->0).withTimeout(2)
     )
     .andThen(
-      drive.driveCommand(()->0,()->-90).withTimeout(2)
+      drive.driveCommand(()->0,()->-0.90).withTimeout(2)
     )
     .andThen(
       drive.driveCommand(()->-0.8, ()->0).withTimeout(2)
     )
     .andThen(
-      drive.driveCommand(()->0,()->-45).withTimeout(2)
+      drive.driveCommand(()->0,()->-0.45).withTimeout(2)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0).withTimeout(0)
@@ -93,12 +89,10 @@ public final class Autos {
   public static Command RightOneHalfAuto(DriveSubsystem drive,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return drive.driveCommand(()->-0.6, ()->0)
-    // stop after 7 seconds, should be at the station by then
-    .withTimeout(5)
+    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
-      drive.driveCommand(()->0,()->30)
+      drive.driveCommand(()->0,()->0.30)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0).withTimeout(2)
@@ -110,13 +104,13 @@ public final class Autos {
       drive.driveCommand(()->0.6,()->0).withTimeout(2)
     )
     .andThen(
-      drive.driveCommand(()->0,()->90).withTimeout(2)
+      drive.driveCommand(()->0,()->0.90).withTimeout(2)
     )
     .andThen(
       drive.driveCommand(()->-0.8, ()->0).withTimeout(2)
     )
     .andThen(
-      drive.driveCommand(()->0,()->45).withTimeout(2)
+      drive.driveCommand(()->0,()->0.45).withTimeout(2)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0).withTimeout(0)

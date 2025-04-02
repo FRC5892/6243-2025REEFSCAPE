@@ -37,8 +37,6 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-      private final CommandXboxController m_codriverController =
-      new CommandXboxController(OperatorConstants.kCoDriverControllerPort);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -53,7 +51,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     SendableChooser<Command> autoChooser = new SendableChooser<>();
     autoChooser.addOption("None", Commands.none());
-    autoChooser.addOption("Center One L1", Autos.OneCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem));
+    autoChooser.addOption("Center One L1", Autos.TestAuto(m_DriveSubsystem));
     SmartDashboard.putData("Auto Chooser",autoChooser);
     configureBindings();
   }
@@ -68,6 +66,8 @@ public class RobotContainer {
     //Coral Controls
     m_driverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
     m_driverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
+    m_driverController.povUp().onTrue(m_ClimbSubsystem.climbCommand());
+    m_driverController.povDown().whileFalse(m_ClimbSubsystem.climbCommand());
     //Climb Controls
     m_driverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbCommand());
     m_driverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbBackCommand());
@@ -84,6 +84,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
    public Command getAutonomousCommand() {
-    return Autos.OneCenterL1Auto(m_DriveSubsystem, m_CoralSubsystem);
+    return Autos.TestAuto(m_DriveSubsystem);
   }
 }

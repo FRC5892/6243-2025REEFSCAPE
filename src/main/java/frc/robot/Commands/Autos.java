@@ -11,14 +11,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 public final class Autos {
   
   public static Command TestAuto(DriveSubsystem driveSubsystem) {
-    // this is like a joystick. But, the speed is always 1 (100% forward
-    // and the rotation is always 0 (forward)
-    return driveSubsystem.driveCommand(()->-2, ()->1).withTimeout(5);
-      // .andThen(
-      //   driveSubsystem.driveCommand(()->0.6, ()->0).withTimeout(2))
-      //   .andThen(
-      //     driveSubsystem.driveCommand(()->2, ()->1).withTimeout(2)
-      //   ); 
+    //Rotation: Positive Speed = Left || Negative Speed = Right
+    return driveSubsystem.driveCommand(()->-0.6, ()->1).withTimeout(5);
   }
 
   public static Command OneCenterL1Auto(DriveSubsystem driveSubsystem,CoralSubsystem coral) {
@@ -41,7 +35,7 @@ public final class Autos {
     return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
-      drive.driveCommand(()->0,()->30)
+      drive.driveCommand(()->0.6,()->1)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0).withTimeout(2)
@@ -73,7 +67,7 @@ public final class Autos {
     return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
-      drive.driveCommand(()->0,()->0.30)
+      drive.driveCommand(()->2,()->1)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0).withTimeout(2)
@@ -85,13 +79,13 @@ public final class Autos {
       drive.driveCommand(()->0.6,()->0).withTimeout(2)
     )
     .andThen(
-      drive.driveCommand(()->0,()->-0.90).withTimeout(2)
+      drive.driveCommand(()->2,()->-2).withTimeout(2)
     )
     .andThen(
       drive.driveCommand(()->-0.8, ()->0).withTimeout(2)
     )
     .andThen(
-      drive.driveCommand(()->0,()->-0.45).withTimeout(2)
+      drive.driveCommand(()->2,()->-1.5).withTimeout(2)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0).withTimeout(0)

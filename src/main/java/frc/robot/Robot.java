@@ -3,9 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
-import org.littletonrobotics.urcl.URCL;
-
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,8 +16,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand1;
-  private Command m_autonomousCommand2;
-  
   private RobotContainer m_robotContainer;
 
   /**
@@ -32,7 +27,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     DataLogManager.start();
-    URCL.start();
     m_robotContainer = new RobotContainer();
   }
 
@@ -63,16 +57,10 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand1 = m_robotContainer.getAutonomousCommand();
-
     // schedule the autonomous command (example)
     if (m_autonomousCommand1 != null) {
       m_autonomousCommand1.schedule();
     }
-
-    if (m_autonomousCommand2 != null) {
-      m_autonomousCommand2.schedule();
-    }
-
   }
 
   /** This function is called periodically during autonomous. */
@@ -88,11 +76,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand1 != null) {
       m_autonomousCommand1.cancel();
     }
-
-    if (m_autonomousCommand2 != null) {
-      m_autonomousCommand2.cancel();
-    }
-
   }
 
   /** This function is called periodically during operator control. */

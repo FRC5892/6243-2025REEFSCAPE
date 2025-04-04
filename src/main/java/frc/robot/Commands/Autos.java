@@ -10,29 +10,40 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public final class Autos {
   
-  public static Command TestAuto(DriveSubsystem driveSubsystem) {
+  public static Command TestCenterTwoPiece(DriveSubsystem drive,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return driveSubsystem.driveCommand(()->-2, ()->1).withTimeout(5);
-      // .andThen(
-      //   driveSubsystem.driveCommand(()->0.6, ()->0).withTimeout(2))
-      //   .andThen(
-      //     driveSubsystem.driveCommand(()->2, ()->1).withTimeout(2)
-      //   ); 
-  }
+    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
+    .andThen(
+      // outtake for 5 seconds 
+      coral.coralForwardCommand().withTimeout(3))
+    .andThen(
+      drive.driveCommand(()->0.6, ()->0).withTimeout(2)
+    )
+    .andThen(
+      drive.driveCommand(()->-0.6, ()->0.6).withTimeout(1)
+      )
+    .andThen(
+      drive.driveCommand(()->-0.7, ()->0).withTimeout(7)
+    )
+    .andThen(
+      drive.driveCommand(()->0.6, ()->0.6).withTimeout(1)
+    )
+    .andThen(
+      drive.driveCommand(()->-0.6, ()->0).withTimeout(5.4)
+    )
+    .andThen(
+      coral.coralForwardCommand().withTimeout(3)
+    );
+  }   
 
-  public static Command OneCenterL1Auto(DriveSubsystem driveSubsystem,CoralSubsystem coral) {
+  public static Command OneCenterL1Auto(DriveSubsystem drive,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return driveSubsystem.driveCommand(()->-0.6, ()->0).withTimeout(5)
+    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
       coral.coralForwardCommand().withTimeout(3));
-      // .andThen(
-      //   driveSubsystem.driveCommand(()->0.6, ()->0).withTimeout(2))
-      //   .andThen(
-      //     driveSubsystem.driveCommand(()->2, ()->1).withTimeout(2)
-      //   ); 
   }   
 
   public static Command OneLeftL1Auto(DriveSubsystem drive,CoralSubsystem coral) {
@@ -66,32 +77,19 @@ public final class Autos {
       coral.coralForwardCommand().withTimeout(5)
     ); 
   } 
-
   public static Command LeftOneHalfAuto(DriveSubsystem drive,CoralSubsystem coral) {
-    // this is like a joystick. But, the speed is always 1 (100% forward
-    // and the rotation is always 0 (forward)
-    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
+    return drive.driveCommand(()->-0.6, ()->0).withTimeout(2)
     .andThen(
-      // outtake for 5 seconds 
-      drive.driveCommand(()->0,()->0.30)
+      drive.driveCommand(()->0.6,()->1).withTimeout(2)
     )
     .andThen(
-      drive.driveCommand(()->-0.6, ()->0).withTimeout(2)
+      drive.driveCommand(()->-0.6,()->0).withTimeout(2)
     )
     .andThen(
-      coral.coralForwardCommand().withTimeout(5)
+        coral.coralForwardCommand().withTimeout(5)
     )
     .andThen(
       drive.driveCommand(()->0.6,()->0).withTimeout(2)
-    )
-    .andThen(
-      drive.driveCommand(()->0,()->-0.90).withTimeout(2)
-    )
-    .andThen(
-      drive.driveCommand(()->-0.8, ()->0).withTimeout(2)
-    )
-    .andThen(
-      drive.driveCommand(()->0,()->-0.45).withTimeout(2)
     )
     .andThen(
       drive.driveCommand(()->-0.6, ()->0).withTimeout(0)

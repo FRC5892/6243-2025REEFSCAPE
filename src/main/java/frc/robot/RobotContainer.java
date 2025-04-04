@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -24,8 +23,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-
-  
 
 //AUTONOMUS Im not sure if it should be here.  
   // The robot's subsystems and commands are defined here...
@@ -37,21 +34,17 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  /**
+  /*
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
    * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
    */
+
   public RobotContainer() {
     // Configure the trigger bindings
     SendableChooser<Command> autoChooser = new SendableChooser<>();
     autoChooser.addOption("None", Commands.none());
-    autoChooser.addOption("Center One L1", Autos.TestAuto(m_DriveSubsystem));
+    autoChooser.addOption("Center One L1", Autos.OneCenterL1Auto(m_DriveSubsystem,m_CoralSubsystem));
     SmartDashboard.putData("Auto Chooser",autoChooser);
     configureBindings();
   }
@@ -66,11 +59,11 @@ public class RobotContainer {
     //Coral Controls
     m_driverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
     m_driverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
-    m_driverController.povUp().onTrue(m_ClimbSubsystem.climbCommand());
-    m_driverController.povDown().whileFalse(m_ClimbSubsystem.climbCommand());
     //Climb Controls
     m_driverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbCommand());
     m_driverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbBackCommand());
+    m_driverController.povUp().onTrue(m_ClimbSubsystem.climbCommand().withTimeout(1.3));
+    m_driverController.start().onTrue(m_ClimbSubsystem.climbBackCommand().withTimeout(1.4));
     //Algae Controls
     m_driverController.b().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
     m_driverController.y().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
@@ -83,7 +76,8 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+   
    public Command getAutonomousCommand() {
-    return Autos.TestAuto(m_DriveSubsystem);
+    return Autos.OneCenterL1Auto(m_DriveSubsystem,m_CoralSubsystem);
   }
 }

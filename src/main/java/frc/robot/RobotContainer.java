@@ -44,7 +44,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     SendableChooser<Command> autoChooser = new SendableChooser<>();
     autoChooser.addOption("None", Commands.none());
-    autoChooser.addOption("Center One L1", Autos.TestAuto(m_DriveSubsystem));
+    autoChooser.addOption("Center One L1", Autos.OneCenterL1Auto(m_DriveSubsystem,m_CoralSubsystem));
     SmartDashboard.putData("Auto Chooser",autoChooser);
     configureBindings();
   }
@@ -59,11 +59,12 @@ public class RobotContainer {
     //Coral Controls
     m_driverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
     m_driverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
-    //Climb Controls
-    m_driverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbCommand());
-    m_driverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbBackCommand());
-    m_driverController.povUp().onTrue(m_ClimbSubsystem.climbCommand());
-    m_driverController.start().onTrue(m_ClimbSubsystem.climbBackCommand());
+    //Regular Climb Controls
+    m_driverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbUpCommand());
+    m_driverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbDownCommand());
+    //Preset Climb Controls
+    m_driverController.start().onTrue(m_ClimbSubsystem.climbUpCommand().withTimeout(1));
+    m_driverController.back().onTrue(m_ClimbSubsystem.climbDownCommand().withTimeout(1.5));
     //Algae Controls
     m_driverController.b().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
     m_driverController.y().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());

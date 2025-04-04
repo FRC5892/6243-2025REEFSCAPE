@@ -14,7 +14,7 @@ public class ClimbSubsystem extends SubsystemBase {
   /** Creates a new ClimbSubsystem. */
   public ClimbSubsystem() {}
 
-  public Command climbCommand(){
+  public Command climbUpCommand(){
     return runEnd(()->{
       climbArmMotor.set(Constants.SpeedConstants.CLIMB_ARM_MOTOR_SPEED);
     },() -> {
@@ -22,7 +22,7 @@ public class ClimbSubsystem extends SubsystemBase {
     });
   } 
 
-  public Command climbBackCommand(){
+  public Command climbDownCommand(){
     return runEnd(()->{
       climbArmMotor.set(Constants.SpeedConstants.CLIMB_BACK_MOTOR_SPEED);
     },() -> {

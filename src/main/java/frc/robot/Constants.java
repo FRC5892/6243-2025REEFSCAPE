@@ -34,11 +34,11 @@ public final class Constants {
     public static final double RIGHT_FRONT_MOTOR_SPEED = 0.4;
     public static final double CORAL_FORWARD_SPEED = -0.6;
     public static final double CORAL_BACKWARD_SPEED = 0.6;
-    public static final double ALGAE_MOTOR_MOVE_SPEED = 0.8;
-    public static final double ALGAE_MOTOR_MOVE_BACK_SPEED = -0.8;
+    public static final double ALGAE_MOTOR_MOVE_SPEED = 0.5;
+    public static final double ALGAE_MOTOR_MOVE_BACK_SPEED = -0.5;
     public static final double ALGAE_MOTOR_OUTTAKE_SPEED = 1.3;
     public static final double ALGAE_MOTOR_INTAKE_SPEED = -1.3;
-    public static final double CLIMB_ARM_MOTOR_SPEED = 1;
-    public static final double CLIMB_BACK_MOTOR_SPEED = -1;
+    public static final double CLIMB_ARM_MOTOR_SPEED = 0.6;
+    public static final double CLIMB_BACK_MOTOR_SPEED = -0.6;
   }
 }

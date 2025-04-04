@@ -30,6 +30,14 @@ public class ClimbSubsystem extends SubsystemBase {
     });
   } 
 
+  public Command climbStopCommand(){
+    return runEnd(()->{
+      climbArmMotor.set(0);
+    },() -> {
+      climbArmMotor.stopMotor();
+    });
+  } 
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

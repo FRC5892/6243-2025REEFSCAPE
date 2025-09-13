@@ -9,7 +9,8 @@ import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public final class Autos {
- public static Command CenterAutoTwoPiece(DriveSubsystem drive,CoralSubsystem coral) {
+ public static Command 
+    CenterAutoTwoPiece(DriveSubsystem drive,CoralSubsystem coral) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
     return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)

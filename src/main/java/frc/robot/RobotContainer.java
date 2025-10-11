@@ -33,6 +33,8 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_codriverController =
+      new CommandXboxController(OperatorConstants.kCoDriverControllerPort);
 
   /*
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -57,19 +59,19 @@ public class RobotContainer {
 
 
     //Coral Controls
-    m_driverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
-    m_driverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
+    m_codriverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
+    m_codriverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
     //Regular Climb Controls
-    m_driverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbUpCommand());
-    m_driverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbDownCommand());
+    m_codriverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbUpCommand());
+    m_codriverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbDownCommand());
     //Preset Climb Controls
-    m_driverController.start().onTrue(m_ClimbSubsystem.climbUpCommand().withTimeout(1));
-    m_driverController.back().onTrue(m_ClimbSubsystem.climbDownCommand().withTimeout(1.5));
+    m_codriverController.start().onTrue(m_ClimbSubsystem.climbUpCommand().withTimeout(1));
+    m_codriverController.back().onTrue(m_ClimbSubsystem.climbDownCommand().withTimeout(1.5));
     //Algae Controls
-    m_driverController.b().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
-    m_driverController.y().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
-    m_driverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
-    m_driverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeOuttakeCommand());
+    m_codriverController.b().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
+    m_codriverController.y().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
+    m_codriverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
+    m_codriverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeOuttakeCommand());
   }
 
   /**

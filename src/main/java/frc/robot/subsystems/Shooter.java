@@ -9,24 +9,25 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class CoralSubsystem extends SubsystemBase {
-   private final SparkMax coralMotor = new SparkMax(Constants.IdConstants.CORAL_MOTOR_ID,MotorType.kBrushed);
+public class Shooter extends SubsystemBase {
+   private final SparkMax shooterMotor = new SparkMax(Constants.IdConstants.SHOOTER_MOTOR_ID,MotorType.kBrushed);
   /** Creates a new CoralSubsystem. */
-  public CoralSubsystem() {
+  public Shooter() {
+
   }
-       public Command coralForwardCommand(){
+       public Command shooterForwardCommand(){
     return runEnd(()->{
-      coralMotor.set(Constants.SpeedConstants.CORAL_FORWARD_SPEED);
+      shooterMotor.set(Constants.SpeedConstants.SHOOTER_FORWARD_SPEED);
     },() -> {
-      coralMotor.stopMotor();
+      shooterMotor.stopMotor();
     });
   }
 
-  public Command coralBackwardCommand(){
+  public Command shooterBackwardCommand(){
     return runEnd(()->{
-      coralMotor.set(Constants.SpeedConstants.CORAL_BACKWARD_SPEED);
+      shooterMotor.set(Constants.SpeedConstants.SHOOTER_BACKWARD_SPEED);
     },() -> {
-      coralMotor.stopMotor();
+      shooterMotor.stopMotor();
     });
   }
 

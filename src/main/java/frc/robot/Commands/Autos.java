@@ -4,19 +4,19 @@
 
 package frc.robot.Commands;
 
-import frc.robot.subsystems.CoralSubsystem;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public final class Autos {
  public static Command 
-    CenterAutoTwoPiece(DriveSubsystem drive,CoralSubsystem coral) {
+    CenterAutoTwoPiece(DriveSubsystem drive,Shooter shooter) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
     return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
-      coral.coralForwardCommand().withTimeout(3))
+      shooter.shooterForwardCommand().withTimeout(3))
     .andThen(
       drive.driveCommand(()->0.6, ()->0).withTimeout(2)
     )
@@ -33,17 +33,17 @@ public final class Autos {
       drive.driveCommand(()->-0.6, ()->0).withTimeout(5.4)
     )
     .andThen(
-      coral.coralForwardCommand().withTimeout(3)
+      shooter.shooterForwardCommand().withTimeout(3)
     );
   }
 
-  public static Command OneCenterL1Auto(DriveSubsystem drive,CoralSubsystem coral) {
+  public static Command OneCenterL1Auto(DriveSubsystem drive,Shooter shooter) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
     return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
     .andThen(
       // outtake for 5 seconds 
-      coral.coralForwardCommand().withTimeout(3));
+      shooter.shooterForwardCommand().withTimeout(3));
   }   
 
   private Autos() {                                                                                                                                                                                                                                                                                                          

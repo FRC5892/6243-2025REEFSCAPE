@@ -6,14 +6,13 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Commands.Autos;
-import frc.robot.subsystems.AlgaeSubsystem;
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.CoralSubsystem;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.Commands;     
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /**
@@ -27,13 +26,14 @@ public class RobotContainer {
 //AUTONOMUS Im not sure if it should be here.  
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
-  private final CoralSubsystem m_CoralSubsystem = new CoralSubsystem();
-  private final AlgaeSubsystem m_AlgaeSubsystem = new AlgaeSubsystem();
-  private final ClimbSubsystem m_ClimbSubsystem = new ClimbSubsystem();
+  private final Shooter m_ShooterSubsystem = new Shooter();
+  private final Intake m_IntakeSubsystem = new Intake();
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final CommandXboxController m_codriverController =
+
       new CommandXboxController(OperatorConstants.kCoDriverControllerPort);
 
   /*
@@ -46,7 +46,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     SendableChooser<Command> autoChooser = new SendableChooser<>();
     autoChooser.addOption("None", Commands.none());
-    autoChooser.addOption("Center One L1", Autos.OneCenterL1Auto(m_DriveSubsystem,m_CoralSubsystem));
+    autoChooser.addOption("Center One L1", Autos.OneCenterL1Auto(m_DriveSubsystem,m_ShooterSubsystem));
     SmartDashboard.putData("Auto Chooser",autoChooser);
     configureBindings();
   }
@@ -58,20 +58,13 @@ public class RobotContainer {
     m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY, m_driverController::getLeftX));
 
 
-    //Coral Controls
-    m_codriverController.a().whileTrue(m_CoralSubsystem.coralForwardCommand());
-    m_codriverController.x().whileTrue(m_CoralSubsystem.coralBackwardCommand());
-    //Regular Climb Controls
-    m_codriverController.rightTrigger().whileTrue(m_ClimbSubsystem.climbUpCommand());
-    m_codriverController.leftTrigger().whileTrue(m_ClimbSubsystem.climbDownCommand());
-    //Preset Climb Controls
-    m_codriverController.start().onTrue(m_ClimbSubsystem.climbUpCommand().withTimeout(1));
-    m_codriverController.back().onTrue(m_ClimbSubsystem.climbDownCommand().withTimeout(1.5));
-    //Algae Controls
-    m_codriverController.b().whileTrue(m_AlgaeSubsystem.algaeArmForwardCommand());
-    m_codriverController.y().whileTrue(m_AlgaeSubsystem.algaeArmBackwardCommand());
-    m_codriverController.rightBumper().whileTrue(m_AlgaeSubsystem.algaeIntakeCommand());
-    m_codriverController.leftBumper().whileTrue(m_AlgaeSubsystem.algaeOuttakeCommand());
+    //Shooter Controls
+    m_driverController.a().whileTrue(m_ShooterSubsystem.shooterForwardCommand());
+    m_driverController.x().whileTrue(m_ShooterSubsystem.shooterBackwardCommand());
+
+    //Intake Controls
+    m_driverController.rightBumper().whileTrue(m_IntakeSubsystem.intakeForwardCommand());
+    m_driverController.leftBumper().whileTrue(m_IntakeSubsystem.intakeBackwardCommand());
   }
 
   /**
@@ -81,6 +74,6 @@ public class RobotContainer {
    */
    
    public Command getAutonomousCommand() {
-    return Autos.OneCenterL1Auto(m_DriveSubsystem,m_CoralSubsystem);
+    return Autos.OneCenterL1Auto(m_DriveSubsystem,m_ShooterSubsystem);
   }
 }

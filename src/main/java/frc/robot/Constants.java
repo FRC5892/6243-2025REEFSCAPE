@@ -21,25 +21,19 @@ public final class Constants {
 
   public static class IdConstants{
     public static final int LEFT_FRONT_MOTOR_ID = 19;
-    public static final int RIGHT_FRONT_MOTOR_ID = 18;
-    public static final int LEFT_BACK_MOTOR_ID = 16;
+    public static final int LEFT_BACK_MOTOR_ID = 4;
+    public static final int RIGHT_FRONT_MOTOR_ID =  1;
     public static final int RIGHT_BACK_MOTOR_ID = 15;
-    public static final int CORAL_MOTOR_ID = 17;
-    public static final int ALGAE_MOTOR_MOVE_ID = 14;
-    public static final int ALGAE_MOTOR_SHOOT_ID = 13;
-    public static final int CLIMB_ARM_MOTOR_ID = 12;
+    public static final int SHOOTER_MOTOR_ID = 8;
+    public static final int INTAKE_MOTOR_ID = 7;
     }
 
     public static class SpeedConstants{
       public static final double LEFT_FRONT_MOTOR_SPEED = 0.4;
       public static final double RIGHT_FRONT_MOTOR_SPEED = 0.4;
-      public static final double CORAL_FORWARD_SPEED = -0.6;
-      public static final double CORAL_BACKWARD_SPEED = 0.6;
-      public static final double ALGAE_MOTOR_MOVE_SPEED = 0.8;
-      public static final double ALGAE_MOTOR_MOVE_BACK_SPEED = -0.8;
-      public static final double ALGAE_MOTOR_OUTTAKE_SPEED = 1.3;
-      public static final double ALGAE_MOTOR_INTAKE_SPEED = -1.3;
-      public static final double CLIMB_ARM_MOTOR_SPEED = 1;
-      public static final double CLIMB_BACK_MOTOR_SPEED = -1;
+      public static final double SHOOTER_FORWARD_SPEED = -0.6;
+      public static final double SHOOTER_BACKWARD_SPEED = 0.6;
+      public static final double INTAKE_FORWARD_SPEED = -4;
+      public static final double INTAKE_BACKWARD_SPEED = 4;
     }
   }

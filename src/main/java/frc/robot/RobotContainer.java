@@ -26,15 +26,13 @@ public class RobotContainer {
 //AUTONOMUS Im not sure if it should be here.  
   // The robot's subsystems and commands are defined here...
   private final DriveSubsystem m_DriveSubsystem = new DriveSubsystem();
-  private final Shooter m_ShooterSubsystem = new Shooter();
+  private final Shooter   m_ShooterSubsystem = new Shooter();
   private final Intake m_IntakeSubsystem = new Intake();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  private final CommandXboxController m_codriverController =
-
-      new CommandXboxController(OperatorConstants.kCoDriverControllerPort);
+  private final CommandXboxController m_codriverController = new CommandXboxController(OperatorConstants.kCoDriverControllerPort);
 
   /*
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -64,6 +62,7 @@ public class RobotContainer {
 
     //Intake Controls
     m_driverController.rightBumper().whileTrue(m_IntakeSubsystem.intakeForwardCommand());
+    m_driverController.rightTrigger().whileTrue(m_IntakeSubsystem.intakeSlowForwardCommand());
     m_driverController.leftBumper().whileTrue(m_IntakeSubsystem.intakeBackwardCommand());
   }
 

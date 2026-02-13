@@ -22,6 +22,14 @@ public class Intake extends SubsystemBase {
     });
   }
 
+   public Command intakeSlowForwardCommand(){
+    return runEnd(()->{
+      intakeMotor.set(Constants.SpeedConstants.INTAKE_FORWARD_SPEED);
+    },() -> {
+      intakeMotor.stopMotor();
+    });
+  }
+
   public Command intakeBackwardCommand(){
     return runEnd(()->{
       intakeMotor.set(Constants.SpeedConstants.INTAKE_BACKWARD_SPEED);

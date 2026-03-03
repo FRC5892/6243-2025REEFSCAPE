@@ -54,7 +54,7 @@ public class RobotContainer {
     
     //Drive Controls
     m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY, m_driverController::getLeftX));
-
+    m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getRightY,m_driverController::getRightX));
 
     //Shooter Controls
     m_driverController.a().whileTrue(m_ShooterSubsystem.shooterForwardCommand());

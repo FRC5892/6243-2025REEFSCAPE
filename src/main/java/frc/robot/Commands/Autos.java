@@ -9,6 +9,16 @@ import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public final class Autos {
+
+    public static Command OneCenterL1Auto(DriveSubsystem drive,Shooter shooter) {
+    // this is like a joystick. But, the speed is always 1 (100% forward
+    // and the rotation is always 0 (forward)
+    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
+    .andThen(
+      // outtake for 5 seconds 
+      shooter.shooterForwardCommand().withTimeout(3));
+  }   
+
  public static Command 
     CenterAutoTwoPiece(DriveSubsystem drive,Shooter shooter) {
     // this is like a joystick. But, the speed is always 1 (100% forward
@@ -36,15 +46,6 @@ public final class Autos {
       shooter.shooterForwardCommand().withTimeout(3)
     );
   }
-
-  public static Command OneCenterL1Auto(DriveSubsystem drive,Shooter shooter) {
-    // this is like a joystick. But, the speed is always 1 (100% forward
-    // and the rotation is always 0 (forward)
-    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
-    .andThen(
-      // outtake for 5 seconds 
-      shooter.shooterForwardCommand().withTimeout(3));
-  }   
 
   private Autos() {                                                                                                                                                                                                                                                                                                          
     throw new UnsupportedOperationException("This is a utility class!");

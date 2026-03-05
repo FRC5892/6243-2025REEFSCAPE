@@ -34,6 +34,7 @@ public final class Constants {
       public static final double SHOOTER_FORWARD_SPEED = 0.8;
       public static final double SHOOTER_BACKWARD_SPEED = -0.6;
       public static final double INTAKE_FORWARD_SPEED = -4;
+       public static final double INTAKE_SLOW_FORWARD_SPEED = -3;
       public static final double INTAKE_BACKWARD_SPEED = 4;
     }
   }

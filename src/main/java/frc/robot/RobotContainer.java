@@ -58,13 +58,14 @@ public class RobotContainer {
 
     
     //Shooter Controls
-    m_driverController.a().whileTrue(m_ShooterSubsystem.shooterForwardCommand());
-    m_driverController.x().whileTrue(m_ShooterSubsystem.shooterBackwardCommand());
+    m_driverController.a().whileTrue(m_ShooterSubsystem.shooterBackwardCommand());
+    m_driverController.x().whileTrue(m_ShooterSubsystem.shooterForwardCommand());
+   m_driverController.x().whileTrue((m_ShooterSubsystem.shooterForwardCommand()).alongWith(m_IntakeSubsystem.intakeForwardCommand()));    
 
     //Intake Controls
-    m_driverController.rightBumper().whileTrue(m_IntakeSubsystem.intakeForwardCommand());
-    m_driverController.rightTrigger().whileTrue(m_IntakeSubsystem.intakeSlowForwardCommand());
-    m_driverController.leftBumper().whileTrue(m_IntakeSubsystem.intakeBackwardCommand());
+    m_driverController.rightTrigger().whileTrue(m_IntakeSubsystem.intakeForwardCommand());
+    // m_driverController.rightBumper().whileTrue(m_IntakeSubsystem.intakeSlowForwardCommand());
+    m_driverController.leftTrigger().whileTrue(m_IntakeSubsystem.intakeBackwardCommand());
   }
 
   /**

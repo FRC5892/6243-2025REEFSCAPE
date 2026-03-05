@@ -13,14 +13,17 @@ public final class Autos {
     public static Command OneCenterL1Auto(DriveSubsystem drive,Shooter shooter) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
-    return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)
-    .andThen(
-      // outtake for 5 seconds 
-      shooter.shooterForwardCommand().withTimeout(3));
+    return      // outtake for 5 seconds 
+      shooter.shooterForwardCommand().withTimeout(3)
+      .andThen(
+        drive.driveCommand(()->0.6, ()->0).withTimeout(5)
+      )
+      .andThen(
+        
+      ); 
   }   
 
- public static Command 
-    CenterAutoTwoPiece(DriveSubsystem drive,Shooter shooter) {
+ public static Command CenterAutoTwoPiece(DriveSubsystem drive,Shooter shooter) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
     return drive.driveCommand(()->-0.6, ()->0).withTimeout(5)

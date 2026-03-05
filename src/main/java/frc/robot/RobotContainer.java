@@ -54,13 +54,12 @@ public class RobotContainer {
     
     //Drive Controls
     m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY, m_driverController::getLeftX));
-    m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getRightY,m_driverController::getRightX));
 
     
     //Shooter Controls
     m_driverController.a().whileTrue(m_ShooterSubsystem.shooterBackwardCommand());
     m_driverController.x().whileTrue(m_ShooterSubsystem.shooterForwardCommand());
-   m_driverController.x().whileTrue((m_ShooterSubsystem.shooterForwardCommand()).alongWith(m_IntakeSubsystem.intakeForwardCommand()));    
+    m_driverController.b().whileTrue((m_ShooterSubsystem.shooterForwardCommand()).alongWith(m_IntakeSubsystem.intakeForwardCommand()));    
 
     //Intake Controls
     m_driverController.rightTrigger().whileTrue(m_IntakeSubsystem.intakeForwardCommand());

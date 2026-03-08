@@ -6,21 +6,34 @@ package frc.robot.Commands;
 
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public final class Autos {
 
-    public static Command OneCenterL1Auto(DriveSubsystem drive,Shooter shooter) {
+    public static Command RightCornerAuto(DriveSubsystem drive,Shooter shooter, Intake intake) {
     // this is like a joystick. But, the speed is always 1 (100% forward
     // and the rotation is always 0 (forward)
     return      // outtake for 5 seconds 
-      shooter.shooterForwardCommand().withTimeout(3)
+      (shooter.shooterTrenchForwardCommand().withTimeout(3).alongWith(intake.intakeForwardCommand())).withTimeout(4)
       .andThen(
-        drive.driveCommand(()->0.6, ()->0).withTimeout(5)
-      )
+        drive.driveCommand(()->-0.6, ()->0.1).withTimeout(2)); 
+  }   
+
+      public static Command TestRightCornerAuto(Shooter shooter, Intake intake) {
+    // this is like a joystick. But, the speed is always 1 (100% forward
+    // and the rotation is always 0 (forward)
+    return      // outtake for 5 seconds 
+      (shooter.shooterTrenchForwardCommand().withTimeout(3).alongWith(intake.intakeForwardCommand())).withTimeout(4);
+    }   
+
+      public static Command LeftCornerAuto(DriveSubsystem drive,Shooter shooter, Intake intake) {
+    // this is like a joystick. But, the speed is always 1 (100% forward
+    // and the rotation is always 0 (forward)
+    return      // outtake for 5 seconds 
+      (shooter.shooterTrenchForwardCommand().withTimeout(3).alongWith(intake.intakeForwardCommand())).withTimeout(4)
       .andThen(
-        
-      ); 
+        drive.driveCommand(()->-0.6, ()->-0.1).withTimeout(2)); 
   }   
 
  public static Command CenterAutoTwoPiece(DriveSubsystem drive,Shooter shooter) {

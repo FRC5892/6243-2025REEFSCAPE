@@ -22,7 +22,7 @@ public class DriveSubsystem extends SubsystemBase {
   private final DifferentialDrive differentialDrive;
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-    differentialDrive = new DifferentialDrive(leftFrontMotor, rightFrontMotor);
+    differentialDrive = new DifferentialDrive(rightFrontMotor, leftFrontMotor);
   }
   
   public Command driveCommand(DoubleSupplier speed, DoubleSupplier rotation){

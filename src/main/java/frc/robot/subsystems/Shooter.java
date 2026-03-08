@@ -15,9 +15,26 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
 
   }
-       public Command shooterForwardCommand(){
+
+         public Command shooterCornerForwardCommand(){
     return runEnd(()->{
-      shooterMotor.set(Constants.SpeedConstants.SHOOTER_FORWARD_SPEED);
+      shooterMotor.set(Constants.SpeedConstants.SHOOTER_TRENCH_FORWARD_SPEED);
+    },() -> {
+      shooterMotor.stopMotor();
+    });
+  }
+
+  public Command shooterCornerhBackwardCommand(){
+    return runEnd(()->{
+      shooterMotor.set(Constants.SpeedConstants.SHOOTER_TRENCH_BACKWARD_SPEED);
+    },() -> {
+      shooterMotor.stopMotor();
+    });
+  }
+
+         public Command shooterForwardCommand(){
+    return runEnd(()->{
+      shooterMotor.set(Constants.SpeedConstants.SHOOTER_NORMAL_FORWARD_SPEED);
     },() -> {
       shooterMotor.stopMotor();
     });
@@ -25,7 +42,23 @@ public class Shooter extends SubsystemBase {
 
   public Command shooterBackwardCommand(){
     return runEnd(()->{
-      shooterMotor.set(Constants.SpeedConstants.SHOOTER_BACKWARD_SPEED);
+      shooterMotor.set(Constants.SpeedConstants.SHOOTER_NORMAL_BACKWARD_SPEED);
+    },() -> {
+      shooterMotor.stopMotor();
+    });
+  }
+
+       public Command shooterTrenchForwardCommand(){
+    return runEnd(()->{
+      shooterMotor.set(Constants.SpeedConstants.SHOOTER_TRENCH_FORWARD_SPEED);
+    },() -> {
+      shooterMotor.stopMotor();
+    });
+  }
+
+  public Command shooterTrenchBackwardCommand(){
+    return runEnd(()->{
+      shooterMotor.set(Constants.SpeedConstants.SHOOTER_TRENCH_BACKWARD_SPEED);
     },() -> {
       shooterMotor.stopMotor();
     });

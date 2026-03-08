@@ -27,14 +27,18 @@ public final class Constants {
     public static final int SHOOTER_MOTOR_ID = 8;
     public static final int INTAKE_MOTOR_ID = 7;
     }
-
+ 
     public static class SpeedConstants{
       public static final double LEFT_FRONT_MOTOR_SPEED = 0.4;
       public static final double RIGHT_FRONT_MOTOR_SPEED = 0.4;
-      public static final double SHOOTER_FORWARD_SPEED = 0.8;
-      public static final double SHOOTER_BACKWARD_SPEED = -0.6;
-      public static final double INTAKE_FORWARD_SPEED = -4;
-    //   public static final double INTAKE_SLOW_FORWARD_SPEED = -3;
-      public static final double INTAKE_BACKWARD_SPEED = 4;
+      public static final double SHOOTER_NORMAL_FORWARD_SPEED = 0.6;
+      public static final double SHOOTER_NORMAL_BACKWARD_SPEED = -0.8;
+      public static final double SHOOTER_TRENCH_FORWARD_SPEED = 0.1;
+      public static final double SHOOTER_TRENCH_BACKWARD_SPEED = -0.1;
+      public static final double SHOOTER_CORNER_FORWARD_SPEED = 0.47;
+      public static final double SHOOTER_CORNER_BACKWARD_SPEED = -0.47;
+      public static final double INTAKE_FORWARD_SPEED = -1.75;
+    //   public static final double INTAKE_SLOW_FORWARD_SPEED = -;
+      public static final double INTAKE_BACKWARD_SPEED = 3.5;
     }
   }

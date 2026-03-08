@@ -44,7 +44,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     SendableChooser<Command> autoChooser = new SendableChooser<>();
     autoChooser.addOption("None", Commands.none());
-    autoChooser.addOption("Center One L1", Autos.OneCenterL1Auto(m_DriveSubsystem,m_ShooterSubsystem));
+    autoChooser.addOption("Center One L1", Autos.TestRightCornerAuto(m_ShooterSubsystem, m_IntakeSubsystem));
     SmartDashboard.putData("Auto Chooser",autoChooser);
     configureBindings();
   }
@@ -54,26 +54,31 @@ public class RobotContainer {
     
     //Drive Controls
     m_DriveSubsystem.setDefaultCommand(m_DriveSubsystem.driveCommand(m_driverController::getLeftY, m_driverController::getLeftX));
-
+ 
     
     //Shooter Controls
-    m_driverController.a().whileTrue(m_ShooterSubsystem.shooterBackwardCommand());
+    m_driverController.a().whileTrue((m_IntakeSubsystem.intakeForwardCommand()).alongWith(m_ShooterSubsystem.shooterBackwardCommand()));
     m_driverController.x().whileTrue(m_ShooterSubsystem.shooterForwardCommand());
-    m_driverController.b().whileTrue((m_ShooterSubsystem.shooterForwardCommand()).alongWith(m_IntakeSubsystem.intakeForwardCommand()));    
+    m_driverController.b().whileTrue(m_ShooterSubsystem.shooterForwardCommand());
+   // m_driverController.x().whileTrue((m_ShooterSubsystem.shooterForwardCommand()).alongWith(m_IntakeSubsystem.intakeForwardCommand()));    
 
     //Intake Controls
     m_driverController.rightTrigger().whileTrue(m_IntakeSubsystem.intakeForwardCommand());
-    // m_driverController.rightBumper().whileTrue(m_IntakeSubsystem.intakeSlowForwardCommand());
-    m_driverController.leftTrigger().whileTrue(m_IntakeSubsystem.intakeBackwardCommand());
+   // m_driverController.rightBumper().whileTrue(m_IntakeSubsystem.intakeSlowForwardCommand());
+    m_driverController.leftTrigger().whileTrue((m_IntakeSubsystem.intakeBackwardCommand()).alongWith(m_ShooterSubsystem.shooterForwardCommand()));
   }
 
   /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
+   * Use this to pass the autonomous command to the main 
+   * 
+   * 
+   * 
+   {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
    
    public Command getAutonomousCommand() {
-    return Autos.OneCenterL1Auto(m_DriveSubsystem,m_ShooterSubsystem);
+    return Autos.TestRightCornerAuto(m_ShooterSubsystem, m_IntakeSubsystem);
   }
 }
